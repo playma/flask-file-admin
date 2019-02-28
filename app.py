@@ -106,6 +106,7 @@ class MyModelView(sqla.ModelView):
 
 
 class FileView(FileAdmin):
+
     def is_accessible(self):
         return login.current_user.is_authenticated
 
@@ -176,7 +177,7 @@ admin = admin.Admin(app, 'Example: Auth', index_view=MyAdminIndexView(), base_te
 # Add view
 admin.add_view(MyModelView(User, db.session))
 path = op.join(op.dirname(__file__), 'static')
-admin.add_view(FileAdmin(path, '/static/', name='Static Files'))
+admin.add_view(FileView(path, '/static/', name='Static Files'))
 
 
 def build_sample_db():
